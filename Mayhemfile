@@ -1,0 +1,6 @@
+project: rnshah9/mayhem-wax
+target: waxc
+
+cmds:
+  - cmd: /wax/waxc @@ --c test.c
+    filepath: /test.wax
