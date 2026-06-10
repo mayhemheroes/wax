@@ -1,0 +1,21 @@
+project: wax
+target: waxc
+
+# File-input (CLI) target: feed the fuzz bytes as a WAX source file to the transpiler. waxc reads the
+# input file and runs the whole front end in src/parser.c (tokenize -> preprocess -> syntax_tree ->
+# compile_syntax_tree) before handing the tree to the C code generator (src/to_c.c). Not libFuzzer:
+# the transpiler binary IS the natural fuzz surface, so the file-input target both fuzzes and serves
+# as its own single-input reproducer. @@ is the input-file placeholder.
+#
+# Ported from the old mayhemheroes integration's single file-input target (old Mayhemfile ran
+# `/wax/waxc /test.wax --c test.c` with filepath /test.wax — the binary the old Dockerfile built via
+# `gcc src/waxc.c`). Same shape — transpile the input .wax to C — now pointed at the base-image build
+# output /mayhem/waxc and kept under the old `target: waxc` name for parity.
+#
+# --silent suppresses waxc's per-stage "[info] ..." progress chatter (it has no bearing on the parse);
+# the generated C is written to /dev/null-equivalent /tmp/out.c (discarded — we fuzz the PARSE +
+# codegen, not the file write). --c selects the C backend, the densest exercise of the transpiler.
+cmds:
+  - cmd: /mayhem/waxc --silent @@ --c /tmp/out.c
+testsuite:
+  - file:///mayhem/mayhem/testsuite
