@@ -1,0 +1,5 @@
+project: wax
+target: waxc
+
+cmds:
+  - cmd: /waxc @@ --c test.c
