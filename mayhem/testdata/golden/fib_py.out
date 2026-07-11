@@ -1,0 +1,33 @@
+#########################################
+# module                                #
+#########################################
+
+# === WAX Standard Library BEGIN ===
+def w_arr_remove(a,i,n):del a[i:i+n]
+def w_slice(a,i,n):return a[i:i+n]
+def w_map_get(m,k,d):
+    try:return m[k]
+    except:return d
+def w_map_remove(m,k):
+    try:del m[k]
+    except:pass
+# === WAX Standard Library END   ===
+
+# === User Code            BEGIN ===
+
+def fib(i):
+    
+    if int((i)<=(1)):
+        return i
+
+    return ((fib(((i)-(1))))+(fib(((i)-(2)))))
+
+def main():
+    
+    x=0
+    x=fib(9)
+    print(str(x))
+    return 0
+
+# === User Code            END   ===
+exit(main())

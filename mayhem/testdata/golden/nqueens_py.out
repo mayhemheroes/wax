@@ -1,0 +1,94 @@
+#########################################
+# module                                #
+#########################################
+
+# === WAX Standard Library BEGIN ===
+def w_arr_remove(a,i,n):del a[i:i+n]
+def w_slice(a,i,n):return a[i:i+n]
+def w_map_get(m,k,d):
+    try:return m[k]
+    except:return d
+def w_map_remove(m,k):
+    try:del m[k]
+    except:pass
+# === WAX Standard Library END   ===
+
+# === User Code            BEGIN ===
+
+def attackable(B,y):
+    
+    x=0
+    x=((B)[y])
+    tmp_it_04=1
+    while True:
+        i__s00=tmp_it_04;
+        if int((i__s00)<=(y)):
+            t__s01=0
+            t__s01=((B)[((y)-(i__s00))])
+            if int(bool((int(bool((int((t__s01)==(x))) or (int((t__s01)==(((x)-(i__s00)))))))) or (int((t__s01)==(((x)+(i__s00))))))):
+                return 1
+
+            tmp_it_04+=1
+        else:break
+    return 0
+
+def putboard(B,s):
+    
+    o=None
+    o="N="
+    (o)+=(str(8))
+    (o)+=(" solution #")
+    (o)+=(str(s))
+    (o)+=("\n")
+    tmp_it_05=0
+    while True:
+        y__s02=tmp_it_05;
+        if int((y__s02)<(8)):
+            tmp_it_06=0
+            while True:
+                x__s03=tmp_it_06;
+                if int((x__s03)<(8)):
+                    (o)+=((("|Q") if (int((((B)[y__s02]))==(x__s03))) else ("|_")))
+                    tmp_it_06+=1
+                else:break
+            (o)+=("|\n")
+            tmp_it_05+=1
+        else:break
+    print(o)
+    o=None#(GC)
+
+def solve():
+    
+    B=None
+    B=([0]*8)
+    s=0
+    s=0
+    y=0
+    y=0
+    (B)[0]=-1
+    while int((y)>=(0)):
+        (B)[y]=((((B)[y]))+(1))
+        while int(bool((int((((B)[y]))<(8))) and (attackable(B,y)))):
+            (B)[y]=((((B)[y]))+(1))
+
+        if int((((B)[y]))<(8)):
+            if int((y)<(((8)-(1)))):
+                y=((y)+(1))
+                (B)[y]=-1
+            else:
+                s=((s)+(1))
+                putboard(B,s)
+
+        else:
+            y=((y)-(1))
+
+
+    B=None#(GC)
+
+def main():
+    
+    solve()
+    return 0
+
+# === User Code            END   ===
+exit(main())
